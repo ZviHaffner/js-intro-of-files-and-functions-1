@@ -1,9 +1,10 @@
 const { check, runTest, skipTest } = require("../../test-api/index.js");
 
 // Challenge 0
-function multiply() {
+function multiply(num1, num2) {
   // This function should return the product of two numbers passed as arguments
   // code here...
+  return num1 * num2;
 }
 
 runTest("multiply() can multiply 2 numbers together", function () {
@@ -13,11 +14,12 @@ runTest("multiply() can multiply 2 numbers together", function () {
 });
 
 // Challenge 1
-function roundDown() {
+function roundDown(num) {
   // This function should take a single argument of a decimal number and return its value rounded DOWN to the nearest integer.
+  return Math.floor(num);
 }
 
-skipTest(
+runTest(
   "roundDown() returns the result of rounding down to the nearest integer",
   function () {
     check(roundDown(100.1)).isEqualTo(100);
@@ -27,22 +29,24 @@ skipTest(
 );
 
 // Challenge 2
-function raiseToPower() {
+function raiseToPower(num1, num2) {
   // This function should take two number arguments, m and n, and return m raised to the power of n.
+  return Math.pow(num1, num2);
 }
 
-skipTest("raiseToPower() raises given number to the given power", function () {
+runTest("raiseToPower() raises given number to the given power", function () {
   check(raiseToPower(10, 3)).isEqualTo(1000);
   check(raiseToPower(25, 2)).isEqualTo(625);
   check(raiseToPower(10, 0)).isEqualTo(1);
 });
 
 // Challenge 3
-function isMultipleOf6() {
+function isMultipleOf6(num) {
   // This function should take a number as an argument, and return true if it is a multiple of 6, and false otherwise.
+  return num % 6 === 0;
 }
 
-skipTest(
+runTest(
   "isMultipleOf6() should check if a number is divisible by 6",
   function () {
     check(isMultipleOf6(6)).isEqualTo(true);
@@ -55,11 +59,12 @@ skipTest(
 );
 
 // Challenge 4
-function capitaliseFirstLetter() {
+function capitaliseFirstLetter(str) {
   // This function should take a string as an argument and return the same string with the first letter capitalised.
+  return str[0].toUpperCase() + str.slice(1);
 }
 
-skipTest(
+runTest(
   "capitaliseFirstLetter() capitalises the first letter in a string",
   function () {
     check(capitaliseFirstLetter("bang")).isEqualTo("Bang");
@@ -69,12 +74,13 @@ skipTest(
 );
 
 // Challenge 5
-function isInThe20thCentury() {
-  // This function should take a number as an argument representing a year, 
+function isInThe20thCentury(year) {
+  // This function should take a number as an argument representing a year,
   // and return true if that year is in the 20th century and false otherwise.
+  return year > 1900 && year < 2001;
 }
 
-skipTest(
+runTest(
   "isInThe20thCentury() checks if a number is within 1901 to 2000 (inclusive)",
   function () {
     check(isInThe20thCentury(1962)).isEqualTo(true);
@@ -88,12 +94,13 @@ skipTest(
 );
 
 // Challenge 6
-function isAbsolutePath() {
+function isAbsolutePath(path) {
   // This function should take a string as an argument representing a file path and return true if it is an absolute path, and false otherwise.
   // HINT: all absolute file paths start with a /
+  return path[0] === "/";
 }
 
-skipTest(
+runTest(
   "isAbsolutePath() checks if a file path is absolute or relative",
   function () {
     check(isAbsolutePath("/Users/mitch")).isEqualTo(true);
@@ -118,11 +125,12 @@ The returned string should be in the following format:
 "The ASCII code for <character> is <character-code>"
 */
 
-function getCharCode() {
+function getCharCode(char) {
   // code here
+  return `The ASCII code for ${char} is ${char.charCodeAt(0)}`;
 }
 
-skipTest(
+runTest(
   "getCharCode() will return a message stating the ASCII code of a passed char",
   function () {
     check(getCharCode("A")).isEqualTo("The ASCII code for A is 65");
@@ -135,11 +143,16 @@ skipTest(
 );
 
 // Challenge 8
-function createArray() {
+function createArray(length, char) {
   // This function should take a length and a character as arguments and return an array of the given length populated with the given character.
+  const arr = [];
+  for (let i = 0; i < length; i++) {
+    arr.push(char);
+  }
+  return arr;
 }
 
-skipTest(
+runTest(
   "createArray() creates an array of the specified length using a specified character",
   function () {
     check(createArray(3, "!")).isEqualTo(["!", "!", "!"]);
@@ -158,11 +171,15 @@ If the battery level is 100% then it should return a string stating:
     "Fully charged :)"
 */
 
-function checkBatteryLevel() {
+function checkBatteryLevel(batteryLevel) {
   // code here
+  if (batteryLevel <= 5)
+    return `Warning - battery level low: ${batteryLevel}%, please charge your device`;
+  else if (batteryLevel === 100) return "Fully charged :)";
+  else return `Battery level: ${batteryLevel}%`;
 }
 
-skipTest(
+runTest(
   "checkBatteryLevel() should return a message with info about the battery level",
   function () {
     check(checkBatteryLevel(100)).isEqualTo("Fully charged :)");
@@ -189,11 +206,12 @@ skipTest(
 );
 
 // Challenge 10
-function collectStrings() {
+function collectStrings(arr) {
   // This function should take an array as an argument and return an array containing all string elements from the input (retaining the order)
+  return arr.filter((element) => typeof element === "string");
 }
 
-skipTest("collectStrings() can get all the strings from an array", function () {
+runTest("collectStrings() can get all the strings from an array", function () {
   check(collectStrings(["a", "b", "c"])).isEqualTo(["a", "b", "c"]);
   check(collectStrings(["a", 10, "b", 1000, "c"])).isEqualTo(["a", "b", "c"]);
 });
