@@ -1,4 +1,5 @@
 const { check, runTest } = require("../../test-api/index.js");
+const { addNumbers, isEven } = require("./utils/mathFunctions.js");
 
 /*
 Complete the function below. It will take two numbers.
@@ -14,6 +15,8 @@ HINT: You will need to export multiple functions from the same file
 
 function isTotalEven(num1, num2) {
   // remember to use 2 util functions to complete this task
+  const total = addNumbers(num1, num2)
+  return isEven(total)
 }
 
 runTest("isTotalEven() should return appropriate boolean for total ", function () {

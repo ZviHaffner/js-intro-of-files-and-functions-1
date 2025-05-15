@@ -1,6 +1,13 @@
 const testFuncs = require("../../test-api/index.js");
 // Change only line three
-const mathFunctions = require("./utils/mathFunctions");
+const {
+  addNumbers,
+  multiplyNumbers,
+  squareNumber,
+  divideNumbers,
+  isEven,
+  getSquareRoot,
+} = require("./utils/mathFunctions");
 // Change only line three
 
 /* 
@@ -22,17 +29,26 @@ testFuncs.runTest("addNumbers() totals two numbers", function () {
 testFuncs.runTest("multiplyNumbers() multiplies two numbers", function () {
   testFuncs.check(multiplyNumbers(5, 5)).isEqualTo(25);
 });
-testFuncs.runTest("squareNumber() gives the square of number passed", function () {
-  testFuncs.check(squareNumber(6)).isEqualTo(36);
-});
-testFuncs.runTest("divideNumbers() divides first number by second", function () {
-  testFuncs.check(divideNumbers(10, 2)).isEqualTo(5);
-});
+testFuncs.runTest(
+  "squareNumber() gives the square of number passed",
+  function () {
+    testFuncs.check(squareNumber(6)).isEqualTo(36);
+  }
+);
+testFuncs.runTest(
+  "divideNumbers() divides first number by second",
+  function () {
+    testFuncs.check(divideNumbers(10, 2)).isEqualTo(5);
+  }
+);
 
 testFuncs.runTest("isEven() return correct boolean for number", function () {
   testFuncs.check(isEven(10)).isEqualTo(true);
   testFuncs.check(isEven(1)).isEqualTo(false);
 });
-testFuncs.runTest("getSquareRoot() return correct boolean for number", function () {
-  testFuncs.check(getSquareRoot(64)).isEqualTo(8);
-});
+testFuncs.runTest(
+  "getSquareRoot() return correct boolean for number",
+  function () {
+    testFuncs.check(getSquareRoot(64)).isEqualTo(8);
+  }
+);
