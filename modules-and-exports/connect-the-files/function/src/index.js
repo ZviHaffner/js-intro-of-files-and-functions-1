@@ -1,7 +1,7 @@
 const { check, runTest } = require("../../../../test-api");
 // do not change the above line
 
-const mystery = require('???') // enter the correct filepath
+const mystery = require('../utils/utils') // enter the correct filepath
 
 runTest("mystery variable is a function", function () {
   check(typeof mystery).isEqualTo('function');
