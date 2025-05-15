@@ -1,7 +1,7 @@
 const { check, runTest } = require("../../../test-api");
 // do not change the above line
 
-const mystery = require('???') // enter the correct filepath
+const mystery = require('./data/data') // enter the correct filepath
 
 runTest("mystery variable is an array", function () {
   check(Array.isArray(mystery)).isEqualTo(true);
