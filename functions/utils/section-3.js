@@ -1,8 +1,9 @@
 const { check, runTest, skipTest } = require("../../test-api/index.js");
 
 // Exercise 11
-function checkIfPropertyExists() {
+function checkIfPropertyExists(obj, key) {
   // This function should take an object and a key as its arguments and return true if the input object contains the provided key and false otherwise
+  return Object.keys(obj).includes(key);
 }
 
 runTest(
@@ -20,29 +21,37 @@ runTest(
   }
 );
 
-
 // Exercise 12
-function getFirstNItems() {
+function getFirstNItems(arr, num) {
   // This function should take two arguments, an array and a number 'n', and return a new array containing the first 'n' items of the given array
+  return arr.slice(0, num);
 }
 
-skipTest("getFirstNItems() returns the first n items in an array", function () {
+runTest("getFirstNItems() returns the first n items in an array", function () {
   check(getFirstNItems(["a", "b", "c", "d"], 2)).isEqualTo(["a", "b"]);
   check(getFirstNItems(["apple", "banana", "pear", "kiwi"], 0)).isEqualTo([]);
   check(getFirstNItems(["apple", "banana", "pear", "kiwi"], 3)).isEqualTo([
     "apple",
     "banana",
-    "pear"
+    "pear",
   ]);
 });
 
 // Exercise 13
-function createArrow() {
+function createArrow(str) {
   // This function should take a string representing a direction ("left", "right", "up" or "down") as its argument and return the corresponding arrow ("←", "→", "↑", "↓")
   // You don't need to utilise an object here, but think about how you could do so
+  const directionMap = {
+    left: "←",
+    right: "→",
+    up: "↑",
+    down: "↓",
+  };
+
+  return directionMap[str];
 }
 
-skipTest(
+runTest(
   "createArrow() will return an arrow pointing in the right direction",
   function () {
     check(createArrow("left")).isEqualTo("←");
@@ -53,36 +62,39 @@ skipTest(
 );
 
 // Exercise 14
-function moveItemToEnd() {
+function moveItemToEnd(arr, idx) {
   // This function should take two arguments, an array and an index value, and should return a new array where the item that was previously at the given index is now at the end of the array
+  const removedItem = arr.splice(idx, 1);
+  arr.push(removedItem[0]);
+  return arr;
 }
 
-skipTest(
+runTest(
   "moveItemToEnd() removes an item at a given index and adds it to the end of the array",
   function () {
     check(moveItemToEnd(["a", "b", "c", "d"], 0)).isEqualTo([
       "b",
       "c",
       "d",
-      "a"
+      "a",
     ]);
     check(moveItemToEnd(["a", "b", "c", "d"], 2)).isEqualTo([
       "a",
       "b",
       "d",
-      "c"
+      "c",
     ]);
     check(moveItemToEnd(["a", "b", "c", "d"], 1)).isEqualTo([
       "a",
       "c",
       "d",
-      "b"
+      "b",
     ]);
   }
 );
 
 // Exercise 15
-function updateUserAge() {
+function updateUserAge(user) {
   /*
   The user of our website is having a birthday!
 
@@ -102,17 +114,18 @@ function updateUserAge() {
 
   NOTE: This function does NOT need to return anything!
   */
+  user.personalDetails.age = user.personalDetails.age + 1;
 }
 
-skipTest("updateUserAge() updates the user's age", function () {
+runTest("updateUserAge() updates the user's age", function () {
   const user1 = {
     admin: false,
     username: "xoxoAlexoxo",
     personalDetails: {
       name: "Alex",
       age: 39,
-      favFood: "gooseberry fool"
-    }
+      favFood: "gooseberry fool",
+    },
   };
 
   updateUserAge(user1);
@@ -123,8 +136,8 @@ skipTest("updateUserAge() updates the user's age", function () {
     personalDetails: {
       name: "Alex",
       age: 40,
-      favFood: "gooseberry fool"
-    }
+      favFood: "gooseberry fool",
+    },
   });
 
   const user2 = {
@@ -133,8 +146,8 @@ skipTest("updateUserAge() updates the user's age", function () {
     personalDetails: {
       name: "Poonam",
       age: 19,
-      favFood: "caviar"
-    }
+      favFood: "caviar",
+    },
   };
 
   updateUserAge(user2);
@@ -145,18 +158,19 @@ skipTest("updateUserAge() updates the user's age", function () {
     personalDetails: {
       name: "Poonam",
       age: 20,
-      favFood: "caviar"
-    }
+      favFood: "caviar",
+    },
   });
 });
 
 // Exercise 16
-function checkInfinitive() {
+function checkInfinitive(str) {
   // This function should take a string representing a French word as an argument, and return true if it is an infinitive verb, and false otherwise
   // A French infinitive verb is a word that ends with either "re", "ir" or "er"
+  return str.endsWith("re") || str.endsWith("ir") || str.endsWith("er");
 }
 
-skipTest(
+runTest(
   "checkInfinitive() checks if a french word is an infinitive",
   function () {
     check(checkInfinitive("manger")).isEqualTo(true);
@@ -175,11 +189,12 @@ skipTest(
 );
 
 // Exercise 17
-function collectPlurals() {
+function collectPlurals(arr) {
   // This function should take an array of strings as an argument and return an array containing all strings ending with an 's' from the input (retaining the order)
+  return arr.filter((str) => str.endsWith("s"));
 }
 
-skipTest(
+runTest(
   "collectPlurals() can collect all the strings ending in an s",
   function () {
     check(
@@ -193,35 +208,36 @@ skipTest(
         "thoughts",
         "cloud",
         "computer",
-        "cups"
+        "cups",
       ])
     ).isEqualTo(["abcs", "humans", "thoughts", "cups"]);
   }
 );
 
 // Exercise 18
-function makeAllAdmins() {
+function makeAllAdmins(usersArr) {
   /*
   This function should take an array of 'user' objects as an argument
   Each user will be an object with a 'name' and 'admin' property
   The 'admin' property will be a boolean value
   You should return an array of user objects each with the 'admin' property set to true
   */
+  return usersArr.map((user) => ({ ...user, admin: true }));
 }
 
-skipTest(
+runTest(
   "makeAllAdmins() updates the admin property for each user",
   function () {
     check(
       makeAllAdmins([
         { name: "Barry", admin: false },
         { name: "Sandeep", admin: true },
-        { name: "Kavita", admin: false }
+        { name: "Kavita", admin: false },
       ])
     ).isEqualTo([
       { name: "Barry", admin: true },
       { name: "Sandeep", admin: true },
-      { name: "Kavita", admin: true }
+      { name: "Kavita", admin: true },
     ]);
   }
 );
@@ -229,15 +245,33 @@ skipTest(
 // Exercise 19
 function createLookupObject(keys, values) {
   // This function should take two arrays of equal length. Return a look up object using the first array as keys, and the second as values, matching the indexes.
+  const lookupObject = {};
+  for (let i = 0; i < keys.length; i++) {
+    lookupObject[keys[i]] = values[i];
+  }
+  return lookupObject;
 }
 
-skipTest(
+runTest(
   "createLookupObject() creates a new object from a key value pair",
   function () {
-    check(createLookupObject(["name"], ["stephen"])).isEqualTo({ name: "stephen" });
-    check(createLookupObject(["apple", "pear"], [3, 1])).isEqualTo({ apple: 3, pear: 1 });
-    check(createLookupObject(["base", "sauce", "topping1", "topping2"], ["thin", "bechamel", "mushrooms", "chicken"])).isEqualTo({
-      base: "thin", sauce: "bechamel", topping1: "mushrooms", topping2: "chicken"
+    check(createLookupObject(["name"], ["stephen"])).isEqualTo({
+      name: "stephen",
+    });
+    check(createLookupObject(["apple", "pear"], [3, 1])).isEqualTo({
+      apple: 3,
+      pear: 1,
+    });
+    check(
+      createLookupObject(
+        ["base", "sauce", "topping1", "topping2"],
+        ["thin", "bechamel", "mushrooms", "chicken"]
+      )
+    ).isEqualTo({
+      base: "thin",
+      sauce: "bechamel",
+      topping1: "mushrooms",
+      topping2: "chicken",
     });
   }
 );
