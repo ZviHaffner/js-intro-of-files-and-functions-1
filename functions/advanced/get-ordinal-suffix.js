@@ -10,7 +10,16 @@ See here for more details: https://www.grammarly.com/blog/how-to-write-ordinal-n
 */
 
 function getOrdinalSuffix(num) {
-  // your solution here
+  const lastTwoDigits = num % 100;
+  const lastDigit = num % 10;
+
+  if (lastTwoDigits >= 10 && lastTwoDigits <= 20) return "th";
+
+  if (lastDigit === 1) return "st";
+  if (lastDigit === 2) return "nd";
+  if (lastDigit === 3) return "rd";
+
+  return "th";
 }
 
 runTest("getOrdinalSuffix() returns 'st' when given 1", function () {
