@@ -21,8 +21,15 @@ countPrinterErrors(control) should return "8/22"
 
  */
 
-function countPrinterErrors() {
+function countPrinterErrors(controlStr) {
   // your solution here
+  let errors = 0;
+
+  for (let char of controlStr) {
+    if (!/[a-m]/.test(char)) errors++;
+  }
+
+  return errors + "/" + controlStr.length;
 }
 
 runTest("countPrinterErrors() should return a string", function () {
