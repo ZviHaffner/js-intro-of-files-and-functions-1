@@ -1,7 +1,11 @@
 const { check, runTest } = require("../../test-api/index.js");
+const { capitaliseFirstLetter } = require("../utils/section-1.js");
 
-function capitaliseNameOfDepartment() {
-  // make use of the util function capitaliseFirstLetter in section 1
+function capitaliseNameOfDepartment(department) {
+  return department
+    .split(" ")
+    .map((str) => capitaliseFirstLetter(str))
+    .join(" ");
 }
 
 runTest(
