@@ -221,3 +221,5 @@ runTest("collectStrings() can get all the strings from an array", function () {
 1. Challenge 5 - complete this problem without resorting to if statements!
 2. Refactor every function into an ES6 arrow function () => {}
 */
+
+module.exports = { capitaliseFirstLetter };
